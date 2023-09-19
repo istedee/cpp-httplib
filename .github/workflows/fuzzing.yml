@@ -18,12 +18,7 @@ jobs:
       run: docker build -t httplib_fuzzer .
 
     - name: Run the fuzzer and collect logs
-      run: |
-        CONTAINER_ID=$(docker run --rm -d httplib_fuzzer)
-        echo "Waiting for container $CONTAINER_ID to finish..."
-        docker wait $CONTAINER_ID
-        docker logs $CONTAINER_ID > ./fuzz_logs.txt
-
+      run: docker run httplib_fuzzer > ./fuzz_logs.txt 2>&1
 
     - name: Upload fuzzer logs as artifact
       uses: actions/upload-artifact@v2
