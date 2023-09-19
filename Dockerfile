@@ -1,4 +1,4 @@
-FROM clangd/clangd:latest
+FROM llvm/llvm-project:latest
   
 RUN apt-get update && apt-get install -y git cmake
 
