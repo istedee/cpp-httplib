@@ -28,7 +28,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
             cli.Put("/", std::string(reinterpret_cast<const char*>(data + 1), size - 1), "text/plain");
             break;
         case 3:
-            cli.Delete(reinterpret_cast<const char*>(data + 1), size - 1);
+            cli.Delete("/", std::string(reinterpret_cast<const char*>(data + 1), size - 1));
             break;
     }
 
