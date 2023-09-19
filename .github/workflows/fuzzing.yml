@@ -22,8 +22,8 @@ jobs:
 
     - name: Upload fuzzer logs as artifact
       uses: actions/upload-artifact@v3
-        with:
-          name: fuzz_logs_${{ github.run_id }}.log
-          path: fuzz_logs.txt
+      with:
+        name: fuzz_logs_${{ github.run_id }}.log
+        path: fuzz_logs.txt
 
 
