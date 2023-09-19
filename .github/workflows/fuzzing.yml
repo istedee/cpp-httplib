@@ -1,21 +1,29 @@
-name: Fuzzing
+name: Fuzzing CI
 
-on:
-  push:
-    branches:
-      - master
+on: [push]
 
 jobs:
   fuzzing:
-    name: Run Fuzzer
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Build Docker image
-      run: docker build -t httplib_fuzzer .
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
 
-    - name: Run the fuzzer
-      run: docker run --rm httplib_fuzzer
+    - name: Build Docker Image
+      run: docker build -t httplib_fuzzing_image .
+
+    - name: Run Fuzzer with Timeout and Save Log
+      run: |
+        docker run --name httplib_fuzzer_container httplib_fuzzing_image /httplib_fuzzer -max_total_time=600 > fuzzing_output.log 2>&1
+
+    - name: Upload Fuzzing Log as Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: fuzzing-log
+        path: fuzzing_output.log
+
+
