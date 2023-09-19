@@ -19,7 +19,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
     // The first byte of the data will decide the type of request
     switch (data[0] % 4) {
         case 0:
-            cli.Get(reinterpret_cast<const char*>(data + 1), size - 1);
+            cli.Get(std::string(reinterpret_cast<const char*>(data + 1), size - 1));
             break;
         case 1:
             cli.Post("/", std::string(reinterpret_cast<const char*>(data + 1), size - 1), "text/plain");
@@ -28,7 +28,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
             cli.Put("/", std::string(reinterpret_cast<const char*>(data + 1), size - 1), "text/plain");
             break;
         case 3:
-            cli.Delete("/", std::string(reinterpret_cast<const char*>(data + 1), size - 1));
+            cli.Delete(std::string(reinterpret_cast<const char*>(data + 1), size - 1));
             break;
     }
 
