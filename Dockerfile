@@ -14,4 +14,5 @@ RUN clang++ -fsanitize=fuzzer,address -I . fuzz_target.cpp -o httplib_fuzzer
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-CMD ["./httplib_fuzzer -max_total_time=600"]
+CMD ["./httplib_fuzzer", "-max_total_time=600"]
+
