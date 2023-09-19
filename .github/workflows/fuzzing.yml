@@ -1,0 +1,21 @@
+name: Fuzzing
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  fuzzing:
+    name: Run Fuzzer
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build Docker image
+      run: docker build -t httplib_fuzzer .
+
+    - name: Run the fuzzer
+      run: docker run --rm httplib_fuzzer
