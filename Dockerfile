@@ -1,6 +1,8 @@
-FROM llvm/llvm-project:latest
-  
-RUN apt-get update && apt-get install -y git cmake
+FROM debian:bullseye-slim
+    
+RUN apt-get update && \
+    apt-get install -y clang git cmake && \
+    apt-get clean
 
 RUN git clone https://github.com/istedee/cpp-httplib.git
 
