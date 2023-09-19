@@ -19,7 +19,7 @@ jobs:
 
     - name: Run the fuzzer and save logs
       run: |
-        CONTAINER_ID=$(docker run --rm -d httplib_fuzzer > /fuzz_logs.txt 2>&1)
+        CONTAINER_ID=$(docker run --rm -d httplib_fuzzer > ./fuzz_logs.txt 2>&1)
         docker wait $CONTAINER_ID
         docker cp $CONTAINER_ID:/fuzz_logs.txt fuzz_logs.txt
 
