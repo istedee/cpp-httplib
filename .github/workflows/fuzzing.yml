@@ -21,9 +21,9 @@ jobs:
       run: docker run httplib_fuzzer > ./fuzz_logs.txt 2>&1
 
     - name: Upload fuzzer logs as artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: fuzzer-logs
-        path: fuzz_logs.txt
+      uses: actions/upload-artifact@v3
+        with:
+          name: fuzz_logs_${{ github.run_id }}.log
+          path: fuzz_logs.txt
 
 
